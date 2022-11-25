@@ -1,0 +1,27 @@
+.inputForm {
+  background: #335;
+  width: 180px;
+  margin: 0 auto 20px;
+  display: grid;
+  grid-template-columns: 100px 80px;
+  border-radius: 15px;
+}
+
+.inputOptions {
+  background: #73718a;
+  border-radius: 15px;
+}
+
+input,
+select {
+  background: none;
+  border: 0;
+  color: #fff;
+}
+input {
+  padding-left: 10px;
+}
+select {
+  /* background: #9492a6; */
+  padding: 15px;
+}
