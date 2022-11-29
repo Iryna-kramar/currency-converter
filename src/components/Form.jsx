@@ -7,12 +7,11 @@ const Form = (props) => {
     fromCurrency,
     toCurrency,
     exchangeRate,
-    amount,
-    setAmount,
     setFromCurrency,
     setToCurrency,
   } = props;
 
+    const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
 
   let toAmount, fromAmount;

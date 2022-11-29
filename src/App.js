@@ -8,9 +8,8 @@ function App() {
   const [data, setData] = useState();
   const [fromCurrency, setFromCurrency] = useState("UAH");
   const [toCurrency, setToCurrency] = useState("USD");
-  const [amount, setAmount] = useState(1);
+
   const [exchangeRate, setExchangeRate] = useState();
-  const [result, setResult] = useState();
 
   const initialState = {
     currencies: ["USD", "EUR", "UAH"],
@@ -20,30 +19,27 @@ function App() {
 
   const { currencies, base, baseAmount } = initialState;
 
-  const url = "https://api.apilayer.com/currency_data";
+  const url = "https://free.currconv.com/api/v7";
 
   const fetchCurrencyData = async () => {
     try {
       const currencyData = await fetchData(
-        `${url}/convert?to=${toCurrency}&from=${fromCurrency}&amount=${amount}`,
+        `${url}/convert?q=${toCurrency}_${fromCurrency}&compact=ultra&apiKey=04c6b727163908432fed`,
         requestOptions
       );
       setData(currencyData);
-      setExchangeRate(currencyData.info.rate);
-      setResult(currencyData.result);
+      setExchangeRate(Object.values(currencyData));
     } catch (error) {
       console.log("error", error);
     }
   };
 
+console.log("data", data);
+console.log("ExchangeRate", exchangeRate);
+
   // useEffect(() => {
   //   fetchCurrencyData();
-  // }, [fromCurrency, toCurrency, amount]);
-
-  console.log(data, "data");
-  console.log(exchangeRate, "exchangeRate");
-  console.log(result, "result");
-  console.log(currencies, "currencies");
+  // }, [fromCurrency, toCurrency]);
 
   return (
     <div className="App">
@@ -54,15 +50,12 @@ function App() {
         fromCurrency={fromCurrency}
         toCurrency={toCurrency}
         exchangeRate={exchangeRate}
-        amount={amount}
       />
       <Form
         currencies={currencies}
         fromCurrency={fromCurrency}
         toCurrency={toCurrency}
         exchangeRate={exchangeRate}
-        amount={amount}
-        setAmount={setAmount}
         setFromCurrency={setFromCurrency}
         setToCurrency={setToCurrency}
       />
