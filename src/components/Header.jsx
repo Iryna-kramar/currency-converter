@@ -4,8 +4,7 @@ import { fetchData, requestOptions } from "../fetchData/fetchData";
 const Header = (props) => {
   const { currencies, base } = props;
 
-  const [headerRate, setHeaderRate] = useState([]);
-  const [baseRate, setBaseRate] = useState([]);
+  const [headerRates, setHeaderRates] = useState([]);
 
   const url = "https://free.currconv.com/api/v7";
 
@@ -18,8 +17,7 @@ const Header = (props) => {
         )
       );
       const result = await Promise.all(currencyReq);
-      setBaseRate(result);
-      setHeaderRate(
+      setHeaderRates(
         result.filter((curr) => {
           if (Object.keys(curr).toString() !== `${base}_${base}`) {
             return curr;
@@ -31,29 +29,26 @@ const Header = (props) => {
     }
   };
 
-  console.log("setHeaderRate", headerRate);
-
-  // useEffect(() => {
-  //   fetchHeaderCurrencyData();
-  // }, []);
+  useEffect(() => {
+    fetchHeaderCurrencyData();
+  }, []);
 
   return (
     <div>
       <h1>Currency Converter</h1>
-      <h2>1 {base} is equivalent to </h2>
-      {headerRate.map(
+      <h3>1 {base} is equivalent to </h3>
+      {headerRates.map(
         (curRate) => (
           console.log("keys", Object.keys(curRate).toString().slice(0, 3)),
           console.log("values", Object.values(curRate)),
           (
-            <h2
-              className=""
+            <h3
               key={Object.keys(curRate)}
               value={Object.values(curRate)}
             >
-              {Object.values(curRate)[0].toFixed(4)} {' '}
+              {Object.values(curRate)[0].toFixed(4)}{" "}
               {Object.keys(curRate).toString().slice(0, 3)}
-            </h2>
+            </h3>
           )
         )
       )}

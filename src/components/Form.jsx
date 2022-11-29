@@ -11,7 +11,7 @@ const Form = (props) => {
     setToCurrency,
   } = props;
 
-    const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
 
   let toAmount, fromAmount;
@@ -34,7 +34,7 @@ const Form = (props) => {
   }
 
   return (
-    <div>
+    <div style={{ marginTop: '50px'}}>
       <h1>Convert</h1>
       <Options
         currencies={currencies}

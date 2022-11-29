@@ -5,10 +5,8 @@ import { Form, Header } from "./components";
 import { fetchData, requestOptions } from "../src/fetchData/fetchData";
 
 function App() {
-  const [data, setData] = useState();
   const [fromCurrency, setFromCurrency] = useState("UAH");
   const [toCurrency, setToCurrency] = useState("USD");
-
   const [exchangeRate, setExchangeRate] = useState();
 
   const initialState = {
@@ -16,7 +14,6 @@ function App() {
     base: "UAH",
     baseAmount: 1,
   };
-
   const { currencies, base, baseAmount } = initialState;
 
   const url = "https://free.currconv.com/api/v7";
@@ -27,19 +24,15 @@ function App() {
         `${url}/convert?q=${toCurrency}_${fromCurrency}&compact=ultra&apiKey=04c6b727163908432fed`,
         requestOptions
       );
-      setData(currencyData);
       setExchangeRate(Object.values(currencyData));
     } catch (error) {
       console.log("error", error);
     }
   };
 
-console.log("data", data);
-console.log("ExchangeRate", exchangeRate);
-
-  // useEffect(() => {
-  //   fetchCurrencyData();
-  // }, [fromCurrency, toCurrency]);
+  useEffect(() => {
+    fetchCurrencyData();
+  }, [fromCurrency, toCurrency]);
 
   return (
     <div className="App">
