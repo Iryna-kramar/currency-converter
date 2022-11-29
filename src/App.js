@@ -18,10 +18,10 @@ function App() {
 
   const url = "https://free.currconv.com/api/v7";
 
-  const fetchCurrencyData = async () => {
+  const fetchCurrencyData = async (cur1, cur2) => {
     try {
       const currencyData = await fetchData(
-        `${url}/convert?q=${toCurrency}_${fromCurrency}&compact=ultra&apiKey=04c6b727163908432fed`,
+        `${url}/convert?q=${cur1}_${cur2}&compact=ultra&apiKey=04c6b727163908432fed`,
         requestOptions
       );
       setExchangeRate(Object.values(currencyData));
@@ -31,7 +31,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetchCurrencyData();
+    fetchCurrencyData(toCurrency, fromCurrency);
   }, [fromCurrency, toCurrency]);
 
   return (
